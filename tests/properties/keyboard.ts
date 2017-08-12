@@ -1,5 +1,6 @@
 import * as angular from 'angular';
 import * as moment from 'moment';
+import * as $ from 'jQuery';
 import * as test from '../utility';
 import { IProviderOptions } from '../../src/provider';
 import { ViewString, IView } from '../../src/definitions';

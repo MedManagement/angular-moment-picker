@@ -62,6 +62,6 @@ export const getPicker = (element: ng.IAugmentedJQuery) => (<IDirectiveScopeInte
 // wrap jquery trigger fn: event trigger + digest stimulation
 export const trigger = (element: ng.IAugmentedJQuery, event: string | JQueryEventObject) => {
 	// use jquey trigger method to propagate event to parent nodes
-	angular.element(element).trigger(<string>event);
+	angular.element(element).triggerHandler(<string>event);
 	$digest();
 };

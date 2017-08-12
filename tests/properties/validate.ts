@@ -17,7 +17,8 @@ describe('Property `validate`', () => {
 	
 	const buildFormScope = (options) => {
 		let $scope = $rootScope.$new(),
-			$form  = angular.element('<form name="form">').appendTo(document.body),
+			//$form  = angular.element('<form name="form">').appendTo(document.body),
+			$form  = angular.element(document.body).append(angular.element('<form name="form">')),
 			$input = test.buildTemplate('input', options, undefined, $scope, $form);
 		return $scope;
 	};

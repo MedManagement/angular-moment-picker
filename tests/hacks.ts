@@ -9,3 +9,4 @@ angular.element(document.body).on('click', (event) => {
 	if (lastFocused) lastFocused.trigger('blur');
 	lastFocused = angular.element(event.target);
 });
+

@@ -194,7 +194,7 @@ angular
 /* 6 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=moment-picker> <div class=\"moment-picker-container {{view.selected}}-view\" ng-class=\"{'moment-picker-disabled': disabled, open: view.isOpen}\"> <div ng-if=additions.top class=\"moment-picker-addition top\"></div> <table class=header-view ng-if=showHeader> <thead> <tr> <th ng-class=\"{disabled: !view.previous.selectable}\" ng-bind-html=view.previous.label ng-click=view.previous.set()></th> <th ng-bind=view.title ng-click=view.setParentView()></th> <th ng-class=\"{disabled: !view.next.selectable}\" ng-bind-html=view.next.label ng-click=view.next.set()></th> </tr> </thead> </table> <div class=moment-picker-specific-views> <table> <thead ng-if=views[view.selected].headers> <tr> <th ng-repeat=\"header in views[view.selected].headers\" ng-bind=header></th> </tr> </thead> <tbody> <tr ng-repeat=\"row in views[view.selected].rows\"> <td ng-repeat=\"item in row track by item.index\" ng-class=item.class ng-bind=item.label ng-click=\"!disabled && views[view.selected].set(item)\"></td> </tr> </tbody> </table> </div> <div ng-if=additions.bottom class=\"moment-picker-addition bottom\"></div> </div> </div>";
+module.exports = "<div class=moment-picker> <div class=\"moment-picker-container {{view.selected}}-view\" ng-class=\"{'moment-picker-disabled': disabled, open: view.isOpen}\"> <div ng-if=additions.top class=\"moment-picker-addition top\"></div> <table class=header-view ng-if=showHeader> <thead> <tr> <th ng-class=\"{disabled: !view.previous.selectable}\" ng-bind-html=view.previous.label ng-click=view.previous.set()></th> <th ng-bind=view.title ng-click=view.setParentView()></th> <th ng-class=\"{disabled: !view.next.selectable}\" ng-bind-html=view.next.label ng-click=view.next.set()></th> </tr> </thead> </table> <div class=moment-picker-specific-views> <table> <thead ng-if=views[view.selected].headers> <tr> <th ng-repeat=\"header in views[view.selected].headers\" ng-bind=header></th> </tr> </thead> <tbody ng-if=\"!views[view.selected].showMeridiem \"> <tr ng-repeat=\"row in views[view.selected].rows\"> <td ng-repeat=\"item in row track by item.index\" ng-class=item.class ng-bind=item.label ng-click=\"!disabled && views[view.selected].set(item)\"></td> </tr> </tbody> <tbody ng-if=views[view.selected].showMeridiem> <tr class=moment-picker-meridiem><td colspan={{views[view.selected].perLine}}>AM</td></tr> <tr ng-repeat=\"row in views[view.selected].rows\"> <td ng-repeat=\"item in row track by item.index\" ng-if=\"item.index < 12\" ng-class=item.class ng-bind=item.label ng-click=\"!disabled && views[view.selected].set(item)\"></td> </tr> <tr class=moment-picker-meridiem><td colspan={{views[view.selected].perLine}}>PM</td></tr> <tr ng-repeat=\"row in views[view.selected].rows\"> <td ng-repeat=\"item in row track by item.index\" ng-if=\"item.index > 11\" ng-class=item.class ng-bind=item.label ng-click=\"!disabled && views[view.selected].set(item)\"></td> </tr> </tbody> </table> </div> <div ng-if=additions.bottom class=\"moment-picker-addition bottom\"></div> </div> </div>";
 
 /***/ }),
 /* 7 */
@@ -723,7 +723,7 @@ var Provider = (function () {
             hoursFormat: 'HH:[00]',
             hoursStart: 0,
             hoursEnd: 23,
-            showMeridian: false,
+            showMeridiem: false,
             // Hour View
             minutesStep: 5,
             minutesStart: 0,
@@ -755,6 +755,7 @@ exports["default"] = Provider;
 
 exports.__esModule = true;
 var utility_1 = __webpack_require__(0);
+var moment = __webpack_require__(2);
 var DayView = (function () {
     function DayView($scope, $ctrl, provider) {
         this.$scope = $scope;
@@ -762,9 +763,11 @@ var DayView = (function () {
         this.provider = provider;
         this.perLine = 4;
         this.rows = {};
+        this.showMeridiem = false;
     }
     DayView.prototype.render = function () {
         var hour = this.$scope.view.moment.clone().startOf('day').hour(this.provider.hoursStart);
+        this.showMeridiem = this.provider.showMeridiem && (moment.localeData(this.provider.locale).longDateFormat("LTS").indexOf('h') > -1);
         this.rows = {};
         for (var h = 0; h <= this.provider.hoursEnd - this.provider.hoursStart; h++) {
             var index = Math.floor(h / this.perLine), selectable = this.$scope.limits.isSelectable(hour, 'hour');

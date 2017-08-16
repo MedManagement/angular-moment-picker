@@ -1,4 +1,5 @@
 import * as angular from 'angular';
+import * as $ from 'jQuery';
 import { IDirectiveScopeInternal } from '../src/definitions';
 
 let $compile, $timeout, $rootScope;
@@ -62,6 +63,8 @@ export const getPicker = (element: ng.IAugmentedJQuery) => (<IDirectiveScopeInte
 // wrap jquery trigger fn: event trigger + digest stimulation
 export const trigger = (element: ng.IAugmentedJQuery, event: string | JQueryEventObject) => {
 	// use jquey trigger method to propagate event to parent nodes
-	angular.element(element).triggerHandler(<string>event);
+	angular.element(element).trigger(<JQueryEventObject>event);
+	//angular.element(element).triggerHandler(<string>event);
+	//$(element).trigger(<string>event);
 	$digest();
 };

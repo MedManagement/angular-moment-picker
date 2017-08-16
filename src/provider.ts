@@ -31,7 +31,7 @@ export interface IProviderOptions {
 	hoursFormat?: string;
 	hoursStart?: number;
 	hoursEnd?: number;
-	showMeridian?: boolean;
+	showMeridiem?: boolean;
 	
 	// Hour View
 	minutesFormat?: string;
@@ -76,7 +76,7 @@ export default class Provider implements angular.IServiceProvider {
 		hoursFormat: 'HH:[00]',
 		hoursStart: 0,
 		hoursEnd: 23,
-		showMeridian: false,
+		showMeridiem: false,
 		
 		// Hour View
 		minutesStep: 5,

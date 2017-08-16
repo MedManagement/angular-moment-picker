@@ -28,6 +28,13 @@ module.exports = function (config) {
 		},
 		frameworks: ['jasmine'],
 		browsers: ['PhantomJS'],
-		singleRun: true
+		singleRun: true,
+		customLaunchers: {
+			ChromeDebugging: {
+			  base: 'Chrome',
+			  flags: [ '--remote-debugging-port=9333' ],
+			  debug:true
+			}
+		  },
 	});
 };

@@ -18,11 +18,23 @@
                         <th ng-repeat="header in views[view.selected].headers" ng-bind="header"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody ng-if="!views[view.selected].showMeridiem ">
                     <tr ng-repeat="row in views[view.selected].rows">
                         <td ng-repeat="item in row track by item.index" ng-class="item.class" ng-bind="item.label"
                             ng-click="!disabled && views[view.selected].set(item)"></td>
                     </tr>
+                </tbody>
+                <tbody ng-if="views[view.selected].showMeridiem">
+                    <tr class="moment-picker-meridiem"><td colspan="{{views[view.selected].perLine}}">AM</td></tr>
+                    <tr ng-repeat="row in views[view.selected].rows" >
+                        <td ng-repeat="item in row track by item.index" ng-if="item.index < 12" ng-class="item.class" ng-bind="item.label"
+                            ng-click="!disabled && views[view.selected].set(item)"></td>
+                    </tr>
+                    <tr class="moment-picker-meridiem"><td colspan="{{views[view.selected].perLine}}">PM</td></tr>
+                    <tr ng-repeat="row in views[view.selected].rows">
+                            <td ng-repeat="item in row track by item.index" ng-if="item.index > 11" ng-class="item.class" ng-bind="item.label"
+                                ng-click="!disabled && views[view.selected].set(item)"></td>
+                        </tr>
                 </tbody>
             </table>
         </div>

@@ -1,0 +1,83 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.js"></script>
+    <!-- <script src="https://cdn.rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.min.js"></script>
+    <link href="https://cdn.rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.min.css" rel="stylesheet"> -->
+
+    <script src="../dist/angular-moment-picker.js"></script>
+    <link href="../dist/angular-moment-picker.css" rel="stylesheet">
+    <style>
+        .moment-picker-meridiem{
+            background-color:blue;
+            color:white;
+        }
+
+        .moment-picker-meridiem td:hover{
+            background-color:blue;
+            color:white;
+            background-image:none;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+    <h1>Test scaffolding</h1>
+    <div ng-controller="scaffold as vm">
+            <div moment-picker="vm.testDate"  
+            start-view="day"
+            min-view="day"
+            max-view="minute"
+            > Test date: {{ vm.testDate }} </div>
+    </div>
+
+    <script type="text/javascript">
+        var myApp = angular.module('myApp', ['moment-picker']);
+    
+        /*
+        * Date picker provider
+        */
+        myApp.config(['momentPickerProvider', function (momentPickerProvider) {
+            momentPickerProvider.options({
+                /* Picker properties */
+                locale:        'en',
+                format:        'L LTS',
+                minView:       'decade',
+                maxView:       'minute',
+                startView:     'year',
+                autoclose:     true,
+                today:         false,
+                keyboard:      false,
+                
+                /* Extra: Views properties */
+                leftArrow:     '&larr;',
+                rightArrow:    '&rarr;',
+                yearsFormat:   'YYYY',
+                monthsFormat:  'MMM',
+                daysFormat:    'D',
+                //hoursFormat:   'HH:[00]',
+                hoursFormat: 'hh:[00]',
+                minutesFormat: moment.localeData().longDateFormat('LT').replace(/[aA]/, ''),
+                secondsFormat: 'ss',
+                minutesStep:   5,
+                secondsStep:   1,
+                showMeridiem: true
+            });
+        }]);
+
+        /*
+        * Test controller
+        */
+        myApp.controller("scaffold", scaffoldController);
+        
+        scaffoldController.$inject = [];
+
+        function scaffoldController($scope){
+            var vm = this;
+
+            vm.testDate = moment();
+        }
+
+    </script>
+</body>
+
+</html>

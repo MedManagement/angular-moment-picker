@@ -16,7 +16,7 @@
         },
         {
             "type": "chrome",
-            "request": "attach",
+            "request": "attach", 
             "name": "Attach Karma Chrome",
             "address": "localhost",
             "port": 9333,

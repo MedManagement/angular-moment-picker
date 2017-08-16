@@ -12,7 +12,7 @@ let generateJsonPlugin = require('generate-json-webpack-plugin');
 
 let isProduction = process.argv.indexOf('-p') != -1;
 let filesuffix = (isProduction ? '.min' : '');
-let filename = 'angular-moment-picker' + filesuffix;
+let filename = 'caresuite-angular-moment-picker' + filesuffix;
 let increase = (process.argv.filter(argv => argv.match(/^increase=.+$/))[0] || '').replace('increase=', '');
 
 // sync bower.json with package.json
@@ -63,7 +63,7 @@ module.exports = {
 	plugins: [
 		extractBaseTheme,
 		...extractOtherThemes.map(theme => theme.extract),
-		new webpack.BannerPlugin('Angular Moment Picker - v' + pkg.version + ' - ' + pkg.homepage + ' - (c) 2015 Indri Muska - ' + pkg.license),
+		new webpack.BannerPlugin('CareSuite Angular Moment Picker - v' + pkg.version + ' - ' + pkg.homepage + ' - (c) 2015 Indri Muska - ' + pkg.license),
 		new generateJsonPlugin('../bower.json', bower, undefined, 2),
 		new generateJsonPlugin('../package.json', pkg, undefined, 2)
 	]

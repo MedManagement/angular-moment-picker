@@ -5,18 +5,22 @@
     <!-- <script src="https://cdn.rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.min.js"></script>
     <link href="https://cdn.rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.min.css" rel="stylesheet"> -->
 
-    <script src="../dist/angular-moment-picker.js"></script>
-    <link href="../dist/angular-moment-picker.css" rel="stylesheet">
+    <script src="../dist/caresuite-angular-moment-picker.js"></script>
+    <link href="../dist/caresuite-angular-moment-picker.css" rel="stylesheet">
     <style>
         .moment-picker-meridiem{
-            background-color:blue;
-            color:white;
+            background-color:white;
+            color:blue;
         }
 
+        .moment-picker-meridiem td{
+            height: 20px !important;
+        }
         .moment-picker-meridiem td:hover{
-            background-color:blue;
-            color:white;
+            background-color:white;
+            color:blue;
             background-image:none;
+            
         }
     </style>
 </head>
@@ -27,6 +31,7 @@
             start-view="day"
             min-view="day"
             max-view="minute"
+            locale="en"
             > Test date: {{ vm.testDate }} </div>
     </div>
 
@@ -54,9 +59,7 @@
                 yearsFormat:   'YYYY',
                 monthsFormat:  'MMM',
                 daysFormat:    'D',
-                //hoursFormat:   'HH:[00]',
                 hoursFormat: 'hh:[00]',
-                minutesFormat: moment.localeData().longDateFormat('LT').replace(/[aA]/, ''),
                 secondsFormat: 'ss',
                 minutesStep:   5,
                 secondsStep:   1,

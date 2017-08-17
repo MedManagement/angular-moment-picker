@@ -14,8 +14,9 @@ export default class DayView implements IView {
 		private provider: IProviderOptions) { }
 
 	public render(): string {
+		let format = moment.localeData(this.$scope.locale).longDateFormat("LT").replace(/[aA]/, '').trim();
 		let hour = this.$scope.view.moment.clone().startOf('day').hour(this.provider.hoursStart);
-		this.showMeridiem = this.provider.showMeridiem && (moment.localeData(this.provider.locale).longDateFormat("LTS").indexOf('h') > -1);
+		this.showMeridiem = this.provider.showMeridiem && (format.indexOf('h') > -1);
 		this.rows = {};
 		for (let h = 0; h <= this.provider.hoursEnd - this.provider.hoursStart; h++) {
 			let index = Math.floor(h / this.perLine),
@@ -23,8 +24,8 @@ export default class DayView implements IView {
 
 			if (!this.rows[index]) this.rows[index] = [];
 			this.rows[index].push({
-				index: h, // this is to prevent DST conflicts
-				label: hour.format(this.provider.hoursFormat),
+				index: h, 
+				label: hour.format(format),
 				year: hour.year(),
 				month: hour.month(),
 				date: hour.date(),
